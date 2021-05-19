@@ -9,7 +9,6 @@ app.set('views','./views')
 app.set('view engine','pug');
 app.use(express.static('public'));
 
-
 //?page=페이지번호&?perPage=페이지당 데이터수
 const $base_url = `https://api.odcloud.kr/api/apnmOrg/v1/list`;
 const $key = '4US0H%2BXj%2BmS8IR4YL0%2BUb9H4CcbTr92QxhYULfOEz1DT%2BZaaos4sRfNh6cmAD2Icli862Ysc31%2BaE4pWywDBIA%3D%3D';
@@ -37,9 +36,8 @@ app.post('/',function(req,res,next){
           });
         
         // console.log(searchList);
-        
         //result라는 변수에 담아 결과 보내기 
-        res.render('main', {result:searchList});
+        res.render('main', {result:searchList, map:map });
     })
 
 })
@@ -52,3 +50,4 @@ app.listen(3000,function(){
 app.get('/',function(req,res){
     res.render('main');
 })
+
