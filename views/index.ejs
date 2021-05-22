@@ -35,7 +35,10 @@
     listData = listData.replaceAll('&#34;','\"');
     listData = JSON.parse(listData);
 
-    console.log(listData);
+    // var x = 0;
+    // var y = 0;
+    // var count = 0;
+
     // console.log(listData[1]);
     //입력되는 배열명이 listData로 들어오면 됨.
     listData.forEach(function(addr, index) {
@@ -45,7 +48,9 @@
         geocoder.addressSearch(tmpaddr, function(result, status) { 
             if (status === kakao.maps.services.Status.OK) { 
                 var coords = new kakao.maps.LatLng(result[0].y, result[0].x); 
-
+                // y += result[0].y;
+                // x += result[0].x;
+                // count += 1;
                 var marker = new kakao.maps.Marker({
                     position: coords,
                     clickable: true}); 
@@ -63,10 +68,11 @@
                         // 마커 위에 인포윈도우를 표시합니다 
                         infowindow.open(map, marker);
                     });
+                    // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+                    map.setCenter(coords);
             }
         });
-            
-    }); 
+     }); 
     
     // 인포윈도우를 표시하는 클로저를 만드는 함수입니다 
     function makeOverListener(map, marker, infowindow) {
