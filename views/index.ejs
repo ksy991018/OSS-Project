@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>여러개 마커에 이벤트 등록하기1</title>
+    
+</head>
+<body>
+
+    <h1>COVID-19 의료기관 검색하기</h1>
+    <form action="/" method="post">
+      <p> 
+        <input type="text" name="region" placeholder="서울시"/>
+        <input type="submit"/>
+      </p>
+    </form>
+
+    <div id="map" style="width:700px;height:400px;"></div>  
+    <script type="text/javascript" src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=35fccf4b4e2a3179187346f26ed3f988&libraries=services"></script>
+    <% if(typeof(result) != "undefined"){ %>
+   <script>
+    var mapContainer = document.getElementById('map'), // 지도를 표시할 div  
+        mapOption = { 
+            center: new kakao.maps.LatLng(37.596672, 127.051950), // 지도의 중심좌표
+            level: 3 // 지도의 확대 레벨
+        };
+    
+    var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
+    var geocoder = new kakao.maps.services.Geocoder();
+    // 지도 확대 축소를 제어할 수 있는 줌 컨트롤을 생성합니다 
+    var zoomControl = new kakao.maps.ZoomControl();
+    map.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT);
+    
+    var listData = "<%= result %>";
+    listData = listData.replaceAll('&#34;','\"');
+    listData = JSON.parse(listData);
+
+    // var x = 0;
+    // var y = 0;
+    // var count = 0;
+
+    // console.log(listData[1]);
+    //입력되는 배열명이 listData로 들어오면 됨.
+    listData.forEach(function(addr, index) {
+        var tmpaddr = ((addr.orgZipaddr).split(','))[0];
+        console.log(tmpaddr);
+        console.log("h");
+        geocoder.addressSearch(tmpaddr, function(result, status) { 
+            if (status === kakao.maps.services.Status.OK) { 
+                var coords = new kakao.maps.LatLng(result[0].y, result[0].x); 
+                // y += result[0].y;
+                // x += result[0].x;
+                // count += 1;
+                var marker = new kakao.maps.Marker({
+                    position: coords,
+                    clickable: true}); 
+                    
+                    // 마커를 지도에 표시합니다. 
+                    marker.setMap(map); 
+                    
+                    // 인포윈도우를 생성합니다 
+                    var infowindow = new kakao.maps.InfoWindow({
+                        content: '<div style="width:150px;text-align:center;padding:6px 0;">' + addr[1] + '</div>',
+                        removable : true
+                    }); 
+                    // 마커에 클릭이벤트를 등록합니다 
+                    kakao.maps.event.addListener(marker, 'click', function() { 
+                        // 마커 위에 인포윈도우를 표시합니다 
+                        infowindow.open(map, marker);
+                    });
+                    // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+                    map.setCenter(coords);
+            }
+        });
+     }); 
+    
+    // 인포윈도우를 표시하는 클로저를 만드는 함수입니다 
+    function makeOverListener(map, marker, infowindow) {
+        return function() {
+            infowindow.open(map, marker);
+        };
+    }
+    
+    // 인포윈도우를 닫는 클로저를 만드는 함수입니다 
+    function makeOutListener(infowindow) {
+        return function() {
+            infowindow.close();
+        };
+    }
+    </script>
+<% } %>
+</body>
+</html>
