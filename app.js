@@ -37,7 +37,7 @@ app.post('/',function(req,res,next){
         
         // console.log(searchList);
         //result라는 변수에 담아 결과 보내기 
-        res.render('main', {result:searchList, map:map });
+        res.render('main', {result:searchList });
     })
 
 })
@@ -51,3 +51,6 @@ app.get('/',function(req,res){
     res.render('main');
 })
 
+app.get('/map',function(req,res){
+    res.resnder('./map/map.html');
+})
