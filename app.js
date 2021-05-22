@@ -8,6 +8,8 @@ app.locals.pretty=true;
 app.set('views','./views')
 app.set('view engine','pug');
 app.use(express.static('public'));
+var http = require('http');
+var fs = require('fs');
 
 //?page=페이지번호&?perPage=페이지당 데이터수
 const $base_url = `https://api.odcloud.kr/api/apnmOrg/v1/list`;
@@ -35,17 +37,28 @@ app.post('/',function(req,res,next){
         
         // console.log(searchList);
         //result라는 변수에 담아 결과 보내기 
-        res.render('main', {result:searchList});
+        res.render('main', {result:searchList });
+
     })
 
 })
 
+app.get('/',function(req,res){
+    res.writeHead(200, {'Content-Type': 'text/html'});
+    fs.readFile('./map/kakaomap.html', null, function(err,data){
+        if(err){
+            res.writeHead(404);
+            res.write('error');
+        }
+        else{
+            console.log('complete!');
+            res.write(data);
+        }
+        res.end();
+    });
+})
 
 app.listen(3000,function(){
     console.log('Connected 3000 port!');
 });
-
-app.get('/',function(req,res){
-    res.render('main');
-})
 
