@@ -1,36 +1,36 @@
-html
-    head 
-     meta(charset='utf-8')
-    body 
-      h1 COVID-19 의료기관 검색하기
+//- html
+//-     head 
+//-      meta(charset='utf-8')
+//-     body 
+//-       h1 COVID-19 의료기관 검색하기
 
-      form(action='/' method="post")
-        p 
-          input(type='text' name='region' placeholder='서울시')  
-          input(type='submit')
+//-       form(action='/' method="post")
+//-         p 
+//-           input(type='text' name='region' placeholder='서울시')  
+//-           input(type='submit')
 
-      //result값 있을때만 
-      if result!=NULL
-        table 
-          tr 
-            th 기관명
-            th 기관 전화번호
-            th 기관 주소
-            th 휴무일 여부
-            th 점심 시작시간
-            th 점심 종료시간
-            th 진료 시작기간
-            th 진료 종료시간
-            -for(i=1; i<result.length; i++)
-              tr
-                td= result[i].orgnm
-                td= result[i].orgTlno
-                td= result[i].orgZipaddr
-                td= result[i].hldyYn
-                td= result[i].lunchSttTm
-                td= result[i].lunchEndTm
-                td= result[i].sttTm
-                td= result[i].endTm
+//-       //result값 있을때만 
+//-       if result!=NULL
+//-         table 
+//-           tr 
+//-             th 기관명
+//-             th 기관 전화번호
+//-             th 기관 주소
+//-             th 휴무일 여부
+//-             th 점심 시작시간
+//-             th 점심 종료시간
+//-             th 진료 시작기간
+//-             th 진료 종료시간
+//-             -for(i=1; i<result.length; i++)
+//-               tr
+//-                 td= result[i].orgnm
+//-                 td= result[i].orgTlno
+//-                 td= result[i].orgZipaddr
+//-                 td= result[i].hldyYn
+//-                 td= result[i].lunchSttTm
+//-                 td= result[i].lunchEndTm
+//-                 td= result[i].sttTm
+//-                 td= result[i].endTm
         
           
       

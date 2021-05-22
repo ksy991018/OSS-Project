@@ -3,10 +3,14 @@ var bodyParser = require('body-parser');
 var request = require('request');
 var cheerio = require('cheerio');
 var app =express();
-app.use(express.urlencoded( {extended : false } ));
-app.locals.pretty=true;
+app.set('view engine','ejs');
 app.set('views','./views')
-app.set('view engine','pug');
+app.use(express.urlencoded( {extended : false } ));
+
+app.locals.pretty=true;
+
+// app.set('view engine','pug');
+
 app.use(express.static('public'));
 var http = require('http');
 var fs = require('fs');
@@ -26,7 +30,7 @@ app.post('/',function(req,res,next){
 
     request($api_url,function(err,response,body){
         if(err) throw err;
-     
+        // console.log(body);
         //data부분만 추출
         var obj = JSON.parse(body).data;
         // console.log(obj);
@@ -37,25 +41,27 @@ app.post('/',function(req,res,next){
         
         // console.log(searchList);
         //result라는 변수에 담아 결과 보내기 
-        res.render('main', {result:searchList });
+        var hey = searchList[0].orgZipaddr.split(',');
+        res.render('index', {result:JSON.stringify(searchList) });
 
     })
 
 })
 
 app.get('/',function(req,res){
-    res.writeHead(200, {'Content-Type': 'text/html'});
-    fs.readFile('./map/kakaomap.html', null, function(err,data){
-        if(err){
-            res.writeHead(404);
-            res.write('error');
-        }
-        else{
-            console.log('complete!');
-            res.write(data);
-        }
-        res.end();
-    });
+    res.render('index');
+    // res.writeHead(200, {'Content-Type': 'text/html'});
+    // fs.readFile('./map/kakaomap.html', null, function(err,data){
+    //     if(err){
+    //         res.writeHead(404);
+    //         res.write('error');
+    //     }
+    //     else{
+    //         console.log('complete!');
+    //         res.write(data);
+    //     }
+    //     res.end();
+    // });
 })
 
 app.listen(3000,function(){
