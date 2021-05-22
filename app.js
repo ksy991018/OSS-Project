@@ -27,9 +27,7 @@ app.post('/',function(req,res,next){
      
         //data부분만 추출
         var obj = JSON.parse(body).data;
-
         // console.log(obj);
-
         //검색한 지역 포함한 모든 data 담기
         let searchList = obj.filter(searchList => {
             return searchList.orgZipaddr.includes(searchWord);
@@ -37,7 +35,7 @@ app.post('/',function(req,res,next){
         
         // console.log(searchList);
         //result라는 변수에 담아 결과 보내기 
-        res.render('main', {result:searchList, map:map });
+        res.render('main', {result:searchList});
     })
 
 })
