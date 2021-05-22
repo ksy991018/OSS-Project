@@ -36,11 +36,8 @@
     listData = listData.replaceAll('&#34;','\"');
     listData = JSON.parse(listData);
 
-    // var x = 0;
-    // var y = 0;
-    // var count = 0;
+    var count = 0;
 
-    // console.log(listData[1]);
     //입력되는 배열명이 listData로 들어오면 됨.
     listData.forEach(function(addr, index) {
         var tmpaddr = ((addr.orgZipaddr).split(','))[0];
@@ -49,9 +46,7 @@
         geocoder.addressSearch(tmpaddr, function(result, status) { 
             if (status === kakao.maps.services.Status.OK) { 
                 var coords = new kakao.maps.LatLng(result[0].y, result[0].x); 
-                // y += result[0].y;
-                // x += result[0].x;
-                // count += 1;
+                count += 1;
                 var marker = new kakao.maps.Marker({
                     position: coords,
                     clickable: true}); 
@@ -61,20 +56,21 @@
                     
                     // 인포윈도우를 생성합니다 
                     var infowindow = new kakao.maps.InfoWindow({
-                        content: '<div style="width:150px;text-align:center;padding:6px 0;">' + addr[1] + '</div>',
-                        removable : true
+                        content: '<div style="width:150px;text-align:center;padding:6px 0;">' + '기관명:' + addr.orgnm + '</div>',
                     }); 
-                    // 마커에 클릭이벤트를 등록합니다 
-                    kakao.maps.event.addListener(marker, 'click', function() { 
-                        // 마커 위에 인포윈도우를 표시합니다 
-                        infowindow.open(map, marker);
-                    });
+                    // 마커에 mouseover 이벤트와 mouseout 이벤트를 등록합니다
+                    // 이벤트 리스너로는 클로저를 만들어 등록합니다 
+                    kakao.maps.event.addListener(marker, 'mouseover', makeOverListener(map, marker, infowindow));
+                    kakao.maps.event.addListener(marker, 'mouseout', makeOutListener(infowindow));
+                    if(count == 1){
+                        map.setCenter(coords);
+                    }
                     // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
                     map.setCenter(coords);
+                    //console.log(listData.length);
             }
         });
      }); 
-    
     // 인포윈도우를 표시하는 클로저를 만드는 함수입니다 
     function makeOverListener(map, marker, infowindow) {
         return function() {
