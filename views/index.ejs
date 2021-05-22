@@ -37,16 +37,16 @@
         listData = listData.replaceAll('&#34;','\"');
         listData = JSON.parse(listData);
 
-        console.log(listData);
-        // console.log(listData[1]);
+        // console.log(listData);
+
         //입력되는 배열명이 listData로 들어오면 됨.
         listData.forEach(function(addr, index) {
             var tmpaddr = ((addr.orgZipaddr).split(','))[0];
-            console.log(tmpaddr);
+            // console.log(tmpaddr);
             geocoder.addressSearch(tmpaddr, function(result, status) { 
                 if (status === kakao.maps.services.Status.OK) { 
                     var coords = new kakao.maps.LatLng(result[0].y, result[0].x); 
-        
+
                     var marker = new kakao.maps.Marker({
                         position: coords,
                         clickable: true}); 
@@ -66,7 +66,6 @@
                         });
                 }
             });
-                
         }); 
         
         // 인포윈도우를 표시하는 클로저를 만드는 함수입니다 
