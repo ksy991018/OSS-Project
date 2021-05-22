@@ -43,9 +43,7 @@
         geocoder.addressSearch(tmpaddr, function(result, status) { 
             if (status === kakao.maps.services.Status.OK) { 
                 var coords = new kakao.maps.LatLng(result[0].y, result[0].x); 
-                // y += result[0].y;
-                // x += result[0].x;
-                // count += 1;
+
                 var marker = new kakao.maps.Marker({
                     position: coords,
                     clickable: true}); 
