@@ -50,18 +50,6 @@ app.post('/',function(req,res,next){
 
 app.get('/',function(req,res){
     res.render('index');
-    // res.writeHead(200, {'Content-Type': 'text/html'});
-    // fs.readFile('./map/kakaomap.html', null, function(err,data){
-    //     if(err){
-    //         res.writeHead(404);
-    //         res.write('error');
-    //     }
-    //     else{
-    //         console.log('complete!');
-    //         res.write(data);
-    //     }
-    //     res.end();
-    // });
 })
 
 app.listen(3000,function(){

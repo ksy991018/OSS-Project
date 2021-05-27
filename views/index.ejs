@@ -23,7 +23,7 @@
     var mapContainer = document.getElementById('map'), // 지도를 표시할 div  
         mapOption = { 
             center: new kakao.maps.LatLng(37.596672, 127.051950), // 지도의 중심좌표
-            level: 5 // 지도의 확대 레벨
+            level: 3 // 지도의 확대 레벨
         };
     
     var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
@@ -45,7 +45,9 @@
         geocoder.addressSearch(tmpaddr, function(result, status) { 
             if (status === kakao.maps.services.Status.OK) { 
                 var coords = new kakao.maps.LatLng(result[0].y, result[0].x); 
+                
                 count += 1;
+
                 var marker = new kakao.maps.Marker({
                     position: coords,
                     clickable: true}); 
