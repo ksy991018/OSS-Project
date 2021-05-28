@@ -6,7 +6,7 @@ var app =express();
 app.set('view engine','ejs');
 app.set('views','./views')
 app.use(express.urlencoded( {extended : false } ));
-
+app.use(express.static(__dirname + '/public'));
 app.locals.pretty=true;
 
 // app.set('view engine','pug');
@@ -41,8 +41,22 @@ app.post('/',function(req,res,next){
         
         // console.log(searchList);
         //result라는 변수에 담아 결과 보내기 
-        var hey = searchList[0].orgZipaddr.split(',');
-        res.render('index', {result:JSON.stringify(searchList) });
+        // var hey = searchList[0].orgZipaddr.split(',');
+        var timeList=[];
+        for(var i=0; i<searchList.length; i++){ //시간정보 파싱 
+            var eachtime=[];
+            console.log(searchList[i]);
+            eachtime.push(searchList[i].lunchSttTm.substr(0,2));
+            eachtime.push(searchList[i].lunchSttTm.substr(2,2));
+            eachtime.push(searchList[i].lunchEndTm.substr(0,2));
+            eachtime.push(searchList[i].lunchEndTm.substr(2,2));
+            eachtime.push(searchList[i].sttTm.substr(0,2));
+            eachtime.push(searchList[i].sttTm.substr(2,2));
+            eachtime.push(searchList[i].endTm.substr(0,2));
+            eachtime.push(searchList[i].endTm.substr(2,2));
+            timeList.push(eachtime);
+        }
+        res.render('index', {result:JSON.stringify(searchList),info:searchList ,timeList:timeList});
 
     })
 
