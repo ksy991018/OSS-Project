@@ -23,19 +23,22 @@
     <script type="text/javascript" src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=35fccf4b4e2a3179187346f26ed3f988&libraries=services"></script>
 
     <% if(typeof(info) != "undefined"){ %>
-    <ul id="placelist">
-        <% for(i=0; i<info.length; i++){%>
-        <li class="item">
-            <div class="info">
-                <h5>기관명 : <%= info[i].orgnm%></h5>
-                <span>점심시간 : <%=timeList[i][0]%>:<%=timeList[i][1]%>~<%=timeList[i][2]%>:<%=timeList[i][3] %></span>
-                <span>진료시간 : <%=timeList[i][4]%>:<%=timeList[i][5]%>~<%=timeList[i][6]%>:<%=timeList[i][7] %></span>
-                <span class="jibun gray">기관주소 : <%=info[i].orgZipaddr%></span>
-                <span class="tel"><%=info[i].orgTlno%></span>
-            </div>
-        </li>
-        <%} %>
-    </ul>
+    <div style="overflow:scroll; width:500px; height:600px; padding:10px;">
+        <ol id="placelist">
+            <% for(i=0; i<info.length; i++){%>
+            <li class="item">
+                <div class="info">
+                    <span><strong><%= info[i].orgnm%></strong></span><br>
+                    <span>점심시간 : <%=timeList[i][0]%>:<%=timeList[i][1]%>~<%=timeList[i][2]%>:<%=timeList[i][3] %></span><br>
+                    <span>진료시간 : <%=timeList[i][4]%>:<%=timeList[i][5]%>~<%=timeList[i][6]%>:<%=timeList[i][7] %></span><br>
+                    <span style="color:gray" class="jibun gray"><%=info[i].orgZipaddr%></span><br>
+                    <span style="color:blue" class="tel"><%=info[i].orgTlno%></span><br>
+                </div>
+                <hr>
+            </li>
+            <%} %>
+        </ul>
+    </div>
     <%} %>
 
     <% if(typeof(result) != "undefined"){ %>
