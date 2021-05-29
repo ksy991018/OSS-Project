@@ -4,26 +4,51 @@
     <meta charset="utf-8">
     <title>여러개 마커에 이벤트 등록하기1</title>
     
+    <!-- <link rel="stylesheet" href="/css/master.css"> -->
+
 </head>
 <body>
-
-    <h1>COVID-19 의료기관 검색하기</h1>
-    <form action="/" method="post">
-      <p> 
-        <input type="text" name="region" placeholder="서울시"/>
-        <input type="submit"/>
-      </p>
-    </form>
-
-    <div id="map" style="width:700px;height:400px;"></div>  
+    <center>
+        <h1>COVID-19 예방접종 위탁 의료기관 조회</h1> <br><hr>
+        <form action="/" method="post">
+        <p> 
+            <br>
+            <div style="float:right; margin-right:250px;margin-right:70px; margin-bottom:7px;">
+                <input type="text" style="width:450px;height:30px;font-size:20px;" name="region" placeholder="지역을 입력하세요" size="20"/>
+                <button type="submit" style="height:35px;font-size:20px;">검색</button> 
+            </div>
+            
+        </p>
+        </form>
+    </center>
+    <div id="map" style="width:1300px;height:750px; margin-left:100px; float:left; " ></div>  
     <script type="text/javascript" src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=35fccf4b4e2a3179187346f26ed3f988&libraries=services"></script>
 
+    <% if(typeof(info) != "undefined"){ %>
+    <div style="overflow:scroll; width:500px; height:675px; padding:10px;float:right; margin-right:70px; border:1px solid black;">
+        <ol id="placelist">
+            <% for(i=0; i<info.length; i++){%>
+            <li class="item">
+                <div class="info">
+                    <span><strong><%= info[i].orgnm%></strong></span><br>
+                    <span>점심시간 : <%=timeList[i][0]%>:<%=timeList[i][1]%>~<%=timeList[i][2]%>:<%=timeList[i][3] %></span><br>
+                    <span>진료시간 : <%=timeList[i][4]%>:<%=timeList[i][5]%>~<%=timeList[i][6]%>:<%=timeList[i][7] %></span><br>
+                    <span style="color:gray" class="jibun gray"><%=info[i].orgZipaddr%></span><br>
+                    <span style="color:blue" class="tel"><%=info[i].orgTlno%></span><br>
+                </div>
+                <hr>
+            </li>
+            <%} %>
+        </ul>
+    </div>
+    <%} %>
+    
     <% if(typeof(result) != "undefined"){ %>
    <script>
     var mapContainer = document.getElementById('map'), // 지도를 표시할 div  
         mapOption = { 
             center: new kakao.maps.LatLng(37.596672, 127.051950), // 지도의 중심좌표
-            level: 3 // 지도의 확대 레벨
+            level: 2 // 지도의 확대 레벨
         };
     
     var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
@@ -55,9 +80,10 @@
                     // 마커를 지도에 표시합니다. 
                     marker.setMap(map); 
                     
+                    var num=1;
                     // 인포윈도우를 생성합니다 
                     var infowindow = new kakao.maps.InfoWindow({
-                        content: '<div style="width:150px;text-align:center;padding:6px 0;">' + '기관명:' + addr.orgnm + '</div>',
+                        content: '<div style="width:250px;text-align:center;padding:5px 0;">' + addr.orgnm + '</div>',
                     }); 
                     // 마커에 mouseover 이벤트와 mouseout 이벤트를 등록합니다
                     // 이벤트 리스너로는 클로저를 만들어 등록합니다 
