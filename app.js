@@ -78,10 +78,9 @@ app.post('/',function(req,res,next){
                 eachtime.push('');
             else
                 eachtime.push(searchList[i].endTm.substr(2,2));
-            if(eachtime == null)
-                eachtime.push('');
-            else
-                timeList.push(eachtime);
+            
+            timeList.push(eachtime);
+                
         }
         res.render('index', {result:JSON.stringify(searchList),info:searchList ,timeList:timeList});
 

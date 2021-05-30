@@ -2,10 +2,18 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>여러개 마커에 이벤트 등록하기1</title>
-    
+    <title>코로나 백신 의료기관 조회</title>
     <!-- <link rel="stylesheet" href="/css/master.css"> -->
-
+    <%if(typeof(info)!="undefined"){%>
+        <script>
+            try {
+                if('<%=info%>'.length==0) throw new error(); 
+            } catch (error) {
+                alert("해당 지역 주변에 가능한 의료기관이 존재하지 않습니다.");
+                location.href='/';
+            }
+        </script>
+    <% }%>
 </head>
 <body>
     <center>
@@ -21,25 +29,38 @@
         </p>
         </form>
     </center>
+
     <div id="map" style="width:1300px;height:750px; margin-left:100px; float:left; " ></div>  
     <script type="text/javascript" src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=35fccf4b4e2a3179187346f26ed3f988&libraries=services"></script>
-
+    
     <% if(typeof(info) != "undefined"){ %>
+
     <div style="overflow:scroll; width:500px; height:675px; padding:10px;float:right; margin-right:70px; border:1px solid black;">
-        <ol id="placelist">
+        <ol id="placelist">   
             <% for(i=0; i<info.length; i++){%>
             <li class="item">
-                <div class="info">
-                    <span><strong><%= info[i].orgnm%></strong></span><br>
-                    <span>점심시간 : <%=timeList[i][0]%>:<%=timeList[i][1]%>~<%=timeList[i][2]%>:<%=timeList[i][3] %></span><br>
-                    <span>진료시간 : <%=timeList[i][4]%>:<%=timeList[i][5]%>~<%=timeList[i][6]%>:<%=timeList[i][7] %></span><br>
+                <div class="info" onmouseover="displayinfowindow('<%=info[i].orgZipaddr%>', '<%=info[i].orgnm%>', true)" onmouseout="displayinfowindow('<%=info[i].orgZipaddr%>', '<%=info[i].orgnm%>', false)">
+                    <span><strong><%= info[i].orgnm%></strong></span>
+                    <%if(info[i].hldyYn=='N') {%>
+                        <span style="color:red"> (당일 휴무) </span>
+                    <%}else { %>                    
+                        <span style="color:green"> (정상운영) </span>
+                    <%}%>
+
+                    <br>
+                    <% if(timeList[i][0]!="" && timeList[i][1]!="" && timeList[i][2]!="" && timeList[i][3]!=""){%>
+                        <span>점심시간 : <%=timeList[i][0]%>:<%=timeList[i][1]%>~<%=timeList[i][2]%>:<%=timeList[i][3] %></span><br>
+                    <%}%>
+                    <% if(timeList[i][4]!="" && timeList[i][5]!="" && timeList[i][6]!="" && timeList[i][7]!=""){%>
+                        <span>진료시간 : <%=timeList[i][4]%>:<%=timeList[i][5]%>~<%=timeList[i][6]%>:<%=timeList[i][7] %></span><br>
+                    <%}%>
                     <span style="color:gray" class="jibun gray"><%=info[i].orgZipaddr%></span><br>
                     <span style="color:blue" class="tel"><%=info[i].orgTlno%></span><br>
                 </div>
                 <hr>
             </li>
             <%} %>
-        </ul>
+        </ol>
     </div>
     <%} %>
     
@@ -75,15 +96,14 @@
 
                 var marker = new kakao.maps.Marker({
                     position: coords,
-                    clickable: true}); 
-                    
+                    clickable: true
+                });      
                     // 마커를 지도에 표시합니다. 
-                    marker.setMap(map); 
-                    
+                    marker.setMap(map);      
                     var num=1;
                     // 인포윈도우를 생성합니다 
                     var infowindow = new kakao.maps.InfoWindow({
-                        content: '<div style="width:250px;text-align:center;padding:5px 0;">' + addr.orgnm + '</div>',
+                        content: '<div style="width:250px;text-align:center;padding:5px 0;">' + addr.orgnm + '</div>', 
                     }); 
                     // 마커에 mouseover 이벤트와 mouseout 이벤트를 등록합니다
                     // 이벤트 리스너로는 클로저를 만들어 등록합니다 
@@ -103,15 +123,41 @@
             infowindow.open(map, marker);
         };
     }
-    
+    var infowindows = [];
     // 인포윈도우를 닫는 클로저를 만드는 함수입니다 
     function makeOutListener(infowindow) {
         return function() {
             infowindow.close();
         };
     }
+
+    var infowindows = [];
+    function displayinfowindow(address,name,flag){
+        if(flag){
+        var tmpaddr = (address.split(','))[0];
+        geocoder.addressSearch(tmpaddr, function(result, status) { 
+            if (status === kakao.maps.services.Status.OK) { 
+                var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+                map.setCenter(coords); 
+                var marker = new kakao.maps.Marker({
+                    position: coords,
+                    clickable: true
+                }); 
+                infowindow = new kakao.maps.InfoWindow({
+                        content: '<div style="width:250px;text-align:center;padding:5px 0;">' + name + '</div>', 
+                }); 
+            infowindows.push(infowindow);
+            infowindow.open(map, marker);
+            }
+        });
+        }
+        else{
+            for(var i = 0; i<infowindows.length;i++)
+                infowindows[i].close();
+            infowindows = [];
+        }
+    }
     </script>
 <% } %>
-
 </body>
 </html>
