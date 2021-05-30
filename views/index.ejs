@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>여러개 마커에 이벤트 등록하기1</title>
+    <title>코로나 백신 의료기관 조회</title>
     
     <!-- <link rel="stylesheet" href="/css/master.css"> -->
 
@@ -30,9 +30,20 @@
             <% for(i=0; i<info.length; i++){%>
             <li class="item">
                 <div class="info">
-                    <span><strong><%= info[i].orgnm%></strong></span><br>
-                    <span>점심시간 : <%=timeList[i][0]%>:<%=timeList[i][1]%>~<%=timeList[i][2]%>:<%=timeList[i][3] %></span><br>
-                    <span>진료시간 : <%=timeList[i][4]%>:<%=timeList[i][5]%>~<%=timeList[i][6]%>:<%=timeList[i][7] %></span><br>
+                    <span><strong><%= info[i].orgnm%></strong></span>
+                    <%if(info[i].hldyYn=='N') {%>
+                        <span style="color:red"> (당일 휴무) </span>
+                    <%}else { %>                    
+                        <span style="color:green"> (정상운영) </span>
+                    <%}%>
+
+                    <br>
+                    <% if(timeList[i][0]!="" && timeList[i][1]!="" && timeList[i][2]!="" && timeList[i][3]!=""){%>
+                        <span>점심시간 : <%=timeList[i][0]%>:<%=timeList[i][1]%>~<%=timeList[i][2]%>:<%=timeList[i][3] %></span><br>
+                    <%}%>
+                    <% if(timeList[i][4]!="" && timeList[i][5]!="" && timeList[i][6]!="" && timeList[i][7]!=""){%>
+                        <span>진료시간 : <%=timeList[i][4]%>:<%=timeList[i][5]%>~<%=timeList[i][6]%>:<%=timeList[i][7] %></span><br>
+                    <%}%>
                     <span style="color:gray" class="jibun gray"><%=info[i].orgZipaddr%></span><br>
                     <span style="color:blue" class="tel"><%=info[i].orgTlno%></span><br>
                 </div>
