@@ -11,6 +11,9 @@
    
 ## 📋 기술 스택
 - Nodejs
+- Html
+- Css
+- JavaScript
 - Express
 - AWS EC2
  
