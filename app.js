@@ -11,7 +11,6 @@ const sslport = 80;
 app.set('view engine','ejs');
 app.set('views','./views')
 app.use(express.urlencoded( {extended : false } ));
-app.use(express.static(__dirname + '/public'));
 app.locals.pretty=true;
 
 // app.set('view engine','pug');
