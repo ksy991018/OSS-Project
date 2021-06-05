@@ -1,3 +1,5 @@
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
 ## 🔍 About the Project
 > 현재 코로나19로 인해 얼마전부터 위탁의료기관을 통한 신종 코로나바이러스 감염증(코로나19) 접종이 본격 시작되었습니다. 
 이에 따라, 원하는 지역의 예방접종 위탁의료기관을 간편하게 조회할 수 있는 서비스를 개발하였습니다. 
@@ -23,13 +25,21 @@ http://khuhub.khu.ac.kr/2018103585/Corona_Vaccination_Medical_Institution.git
 ```
 npm install
 ```
-3. Execute 
+3. add API key
+> Fill {} with API Key
+```
+const $key = '{Corona Vaccination Medical Institution API key}' (app.js)
+```
+```
+<script type="text/javascript" src="https://dapi.kakao.com/v2/maps/sdk.js?appkey={Kakao map API Key}&libraries=services"></script> (index.ejs)
+```
+4. Execute 
 ```
 node app.js
 ```
 
 ## 💻 Project Architecture
-<img src="/uploads/abc7fb1cd4ee2ab997956e529c24670e/프로젝트아키텍쳐.png"  width="1000" height="600">
+<img src="/uploads/abc7fb1cd4ee2ab997956e529c24670e/프로젝트아키텍쳐.png"  width="800" height="400">
 
   
    
