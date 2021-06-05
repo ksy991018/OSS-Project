@@ -32,11 +32,11 @@
         </form>
     </center>
 
-    <div id="map" style="width:1300px;height:750px; margin-left:100px; float:left; border: 3px solid; " ></div>  
+    <div id="map" style="width:1300px;height:750px; margin-left:100px; float:left; border: 3px solid; " ></div> 
     <script type="text/javascript" src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=35fccf4b4e2a3179187346f26ed3f988&libraries=services"></script>
-    
-    <% if(typeof(info) != "undefined"){ %>
-    <div id="map" style="width:65%;height:550px;float:left; margin-left: 2%; border-radius: 2%; border:1px solid black" ></div>  
+
+    <% if(typeof(info) != "undefined"){ %>  
+     
     <div style="overflow:scroll; width:25%; height:550px;float:left; margin-left:2%; border:1px solid black;">
         <ol id="placelist">   
             <% for(i=0; i<info.length; i++){%>

@@ -16,12 +16,8 @@ app.locals.pretty=true;
 // app.set('view engine','pug');
 
 app.use(express.static('public'));
-var HTTPS = require('http');
+var http = require('http');
 var fs = require('fs');
-const path = require('path');
-const domain = "도메인 변경"
- const sslport = 23023; 
-
 
 //?page=페이지번호&?perPage=페이지당 데이터수
 const $base_url = `https://api.odcloud.kr/api/apnmOrg/v1/list`;
@@ -104,18 +100,5 @@ app.listen(3000,function(){
     console.log('Connected 3000 port!');
 });
 
-try {
-const opion = {
-ca: fs.readFileSync('/etc/letsencrypt/live/' + domain +'/fullchain.pem'),
-key: fs.readFileSync(path.resolve(process.cwd(), '/etc/letsencrypt/live/' + domain +'/privkey.pem'), 'utf8').toString(),
-cert: fs.readFileSync(path.resolve(process.cwd(), '/etc/letsencrypt/live/' + domain +'/cert.pem'), 'utf8').toString(),
-};
-HTTPS.createServer(option, app).listen(sslport, () => {
-    console.log(`[HTTPS] Server is started on port ${sslport}`);
-  });
- } catch (error) {
-    console.log('[HTTPS] HTTPS 오류가 발생하였습니다. HTTPS 서버는 실행되지 않습니다.');
-    console.log(error);
-}
-   
+
   
