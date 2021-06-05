@@ -14,31 +14,34 @@
             }
         </script>
     <% }%>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script type="text/javascript" src="/resource/js/bootstrap.js"></script>
 </head>
 <body>
     <center>
-        <h1>COVID-19 예방접종 위탁 의료기관 조회</h1> <br><hr>
+
+        <!-- <div style="background: #e8ecff; border-left: 0.5em solid #688FF4;border-right: 0.5em solid #688FF4; padding: 0.5em;"> -->
+            <h2>COVID-19 예방접종 위탁 의료기관 조회</h2> <hr>
+        <!-- </div> -->
         <form action="/" method="post">
         <p> 
-            <br>
-            <div style="float:right; margin-right:250px;margin-right:70px; margin-bottom:7px;">
-                <input type="text" style="width:450px;height:30px;font-size:20px;" name="region" placeholder="지역을 입력하세요" size="20"/>
-                <button type="submit" style="height:35px;font-size:20px;">검색</button> 
-            </div>
-            
+            <div style="float:right; width:40%; margin-bottom:10px; margin-right: 5px;">
+                <input type="text" style="height:25px;font-size:15px;" name="region" placeholder="지역을 입력하세요" size="20"/>
+                <button type="submit" style="height:30px;font-size:15px;" class="btn btn-info" >검색</button> 
+            </div>        
         </p>
         </form>
     </center>
 
-    <div id="map" style="width:1300px;height:750px; margin-left:100px; float:left; " ></div>  
+    
     <script type="text/javascript" src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=35fccf4b4e2a3179187346f26ed3f988&libraries=services"></script>
     
     <% if(typeof(info) != "undefined"){ %>
-
-    <div style="overflow:scroll; width:500px; height:675px; padding:10px;float:right; margin-right:70px; border:1px solid black;">
+    <div id="map" style="width:65%;height:550px;float:left; margin-left: 2%; border-radius: 2%; border:1px solid black" ></div>  
+    <div style="overflow:scroll; width:25%; height:550px;float:left; margin-left:2%; border:1px solid black;">
         <ol id="placelist">   
             <% for(i=0; i<info.length; i++){%>
-            <li class="item">
+            <li class="item" style="font-size: 13px; ">
                 <div class="info" onmouseover="displayinfowindow('<%=info[i].orgZipaddr%>', '<%=info[i].orgnm%>', true)" onmouseout="displayinfowindow('<%=info[i].orgZipaddr%>', '<%=info[i].orgnm%>', false)">
                     <span><strong><%= info[i].orgnm%></strong></span>
                     <%if(info[i].hldyYn=='N') {%>
@@ -54,7 +57,7 @@
                     <% if(timeList[i][4]!="" && timeList[i][5]!="" && timeList[i][6]!="" && timeList[i][7]!=""){%>
                         <span>진료시간 : <%=timeList[i][4]%>:<%=timeList[i][5]%>~<%=timeList[i][6]%>:<%=timeList[i][7] %></span><br>
                     <%}%>
-                    <span style="color:gray" class="jibun gray"><%=info[i].orgZipaddr%></span><br>
+                    <span style="color:gray" class="jibun gray; font-style: oblique;" ><%=info[i].orgZipaddr%></span><br>
                     <span style="color:blue" class="tel"><%=info[i].orgTlno%></span><br>
                 </div>
                 <hr>
@@ -103,7 +106,7 @@
                     var num=1;
                     // 인포윈도우를 생성합니다 
                     var infowindow = new kakao.maps.InfoWindow({
-                        content: '<div style="width:250px;text-align:center;padding:5px 0;">' + addr.orgnm + '</div>', 
+                        content: '<div style="border-radius:3%; width:200px;text-align:center;padding:3px 0; font-size:12px">' + addr.orgnm + '</div>', 
                     }); 
                     // 마커에 mouseover 이벤트와 mouseout 이벤트를 등록합니다
                     // 이벤트 리스너로는 클로저를 만들어 등록합니다 
@@ -144,7 +147,7 @@
                     clickable: true
                 }); 
                 infowindow = new kakao.maps.InfoWindow({
-                        content: '<div style="width:250px;text-align:center;padding:5px 0;">' + name + '</div>', 
+                        content: '<div style="border-radius:3%; width:200px;text-align:center;padding:3px 0; font-size:12px">' + name + '</div>', 
                 }); 
             infowindows.push(infowindow);
             infowindow.open(map, marker);

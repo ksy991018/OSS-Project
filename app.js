@@ -2,7 +2,12 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var request = require('request');
 var cheerio = require('cheerio');
+
 var app =express();
+const HTTPS = require('https');
+const domain = "www.stagefive.tk"
+const sslport = 80;
+
 app.set('view engine','ejs');
 app.set('views','./views')
 app.use(express.urlencoded( {extended : false } ));
