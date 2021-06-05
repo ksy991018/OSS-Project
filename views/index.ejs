@@ -30,7 +30,7 @@
         </form>
     </center>
 
-    <div id="map" style="width:1300px;height:750px; margin-left:100px; float:left; " ></div>  
+    <div id="map" style="width:1300px;height:750px; margin-left:100px; float:left; border: 3px solid; " ></div>  
     <script type="text/javascript" src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=35fccf4b4e2a3179187346f26ed3f988&libraries=services"></script>
     
     <% if(typeof(info) != "undefined"){ %>
@@ -138,7 +138,7 @@
         geocoder.addressSearch(tmpaddr, function(result, status) { 
             if (status === kakao.maps.services.Status.OK) { 
                 var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
-                map.setCenter(coords); 
+                map.setCenter(coords);
                 var marker = new kakao.maps.Marker({
                     position: coords,
                     clickable: true
@@ -157,6 +157,16 @@
             infowindows = [];
         }
     }
+    </script>
+<% }else{ %>
+    <script>//입력 값이 없을 때 기본 지도 띄움
+        var mapContainer = document.getElementById('map'), // 지도를 표시할 div  
+        mapOption = { 
+            center: new kakao.maps.LatLng(37.596672, 127.051950), // 지도의 중심좌표
+            level: 3 // 지도의 확대 레벨
+        };
+    
+        var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
     </script>
 <% } %>
 </body>
