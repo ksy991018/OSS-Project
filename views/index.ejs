@@ -3,7 +3,6 @@
 <head>
     <meta charset="utf-8">
     <title>코로나 백신 의료기관 조회</title>
-
     <%if(typeof(info)!="undefined"){%>
         <script>
             try {
@@ -18,7 +17,8 @@
 </head>
 <body>
     <center>
-        <h1 style="font-family:verdana;font-weight:bold; ">COVID-19 예방접종 위탁 의료기관 조회</h1> <hr>
+        <h1 style="font-family:verdana;">COVID-19 예방접종 위탁 의료기관 조회</h1> <hr>
+
         <form action="/" method="post">
         <p> 
             <div style="float:right; width:40%; margin-bottom:10px; margin-right: 5px;">
@@ -28,11 +28,10 @@
         </p>
         </form>
     </center>
-  
-    <script type="text/javascript" src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=35fccf4b4e2a3179187346f26ed3f988&libraries=services"></script>
     
-    <% if(typeof(info) != "undefined"){ %>
-    <div id="map" style="width:65%;height:550px;float:left; margin-left: 2%; border-radius: 2%; border:1px solid black" ></div>  
+    <script type="text/javascript" src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=35fccf4b4e2a3179187346f26ed3f988&libraries=services"></script>
+    <% if(typeof(info) != "undefined"){ %>  
+    <div id="map" style="width:65%;height:550px;float:left; margin-left: 2%; border-radius: 2%; border:1px solid black" ></div> 
     <div style="overflow:scroll; width:25%; height:550px;float:left; margin-left:2%; border:1px solid black;">
         <ol id="placelist">   
             <% for(i=0; i<info.length; i++){%>
@@ -44,7 +43,6 @@
                     <%}else { %>                    
                         <span style="color:green"> (정상운영) </span>
                     <%}%>
-
                     <br>
                     <% if(timeList[i][0]!="" && timeList[i][1]!="" && timeList[i][2]!="" && timeList[i][3]!=""){%>
                         <span>점심시간 : <%=timeList[i][0]%>:<%=timeList[i][1]%>~<%=timeList[i][2]%>:<%=timeList[i][3] %></span><br>
@@ -60,14 +58,14 @@
             <%} %>
         </ol>
     </div>
-    <%} %>
+    <%}%>
     
     <% if(typeof(result) != "undefined"){ %>
    <script>
     var mapContainer = document.getElementById('map'), // 지도를 표시할 div  
         mapOption = { 
             center: new kakao.maps.LatLng(37.596672, 127.051950), // 지도의 중심좌표
-            level: 2 // 지도의 확대 레벨
+            level: 3 // 지도의 확대 레벨
         };
     
     var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
@@ -81,7 +79,6 @@
     listData = JSON.parse(listData);
     
     var count = 0;
-
     //입력되는 배열명이 listData로 들어오면 됨.
     listData.forEach(function(addr, index) {
         var tmpaddr = ((addr.orgZipaddr).split(','))[0];
@@ -91,7 +88,6 @@
                 var coords = new kakao.maps.LatLng(result[0].y, result[0].x); 
                 
                 count += 1;
-
                 var marker = new kakao.maps.Marker({
                     position: coords,
                     clickable: true
@@ -128,7 +124,6 @@
             infowindow.close();
         };
     }
-
     var infowindows = [];
     function displayinfowindow(address,name,flag){
         if(flag){
@@ -136,7 +131,7 @@
         geocoder.addressSearch(tmpaddr, function(result, status) { 
             if (status === kakao.maps.services.Status.OK) { 
                 var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
-                map.setCenter(coords); 
+                map.setCenter(coords);//인포윈도우 생성 마커로 이동 
                 var marker = new kakao.maps.Marker({
                     position: coords,
                     clickable: true
@@ -156,6 +151,18 @@
         }
     }
     </script>
+<% }else{ %>
+    <div id="map" style="width:90%;height:550px;float:left; margin-left: 2%; border-radius: 2%; border:1px solid black" ></div> 
+    <script>//입력 값이 없을 때 기본 지도 띄움
+        var mapContainer = document.getElementById('map'), // 지도를 표시할 div  
+        mapOption = { 
+            center: new kakao.maps.LatLng(37.596672, 127.051950), // 지도의 중심좌표
+            level: 3 // 지도의 확대 레벨
+        };
+
+        var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
+    </script>
+    
 <% } %>
 </body>
 </html>

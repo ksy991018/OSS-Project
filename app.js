@@ -24,18 +24,14 @@ app.post('/',function(req,res,next){
 
     request($api_url,function(err,response,body){
         if(err) throw err;
-        // console.log(body);
         //data부분만 추출
         var obj = JSON.parse(body).data;
-        // console.log(obj);
         //검색한 지역 포함한 모든 data 담기
         let searchList = obj.filter(searchList => {
             return searchList.orgZipaddr.includes(searchWord);
           });
         
-        // console.log(searchList);
         //result라는 변수에 담아 결과 보내기 
-        // var hey = searchList[0].orgZipaddr.split(',');
         var timeList=[];
         for(var i=0; i<searchList.length; i++){ //시간정보 파싱 
             var eachtime=[];
@@ -77,9 +73,7 @@ app.post('/',function(req,res,next){
                 
         }
         res.render('index', {result:JSON.stringify(searchList),info:searchList ,timeList:timeList});
-
     })
-
 })
 
 app.get('/',function(req,res){
@@ -90,3 +84,5 @@ app.listen(3000,function(){
     console.log('Connected 3000 port!');
 });
 
+
+  
