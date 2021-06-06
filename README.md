@@ -11,7 +11,7 @@
    
 ## 📋 기술 스택
 - Nodejs
-- Html
+- Html(-> ejs(Embedded JavaScript))
 - Css
 - JavaScript
 - Express
@@ -42,7 +42,7 @@ node app.js
 ```
 
 ## 💻 Project Architecture
-<img src="/uploads/abc7fb1cd4ee2ab997956e529c24670e/프로젝트아키텍쳐.png"  width="800" height="400">
+<img src="/uploads/e100a6266d6c84863f5890fd3c54c56e/프로젝트_아키텍처.PNG"  width="800" height="400">
 
   
    
