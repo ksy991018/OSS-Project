@@ -2,22 +2,12 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var request = require('request');
 var cheerio = require('cheerio');
-
 var app =express();
-const HTTPS = require('https');
-const domain = "www.stagefive.tk"
-const sslport = 80;
 
 app.set('view engine','ejs');
 app.set('views','./views')
 app.use(express.urlencoded( {extended : false } ));
 app.locals.pretty=true;
-
-// app.set('view engine','pug');
-
-app.use(express.static('public'));
-var http = require('http');
-var fs = require('fs');
 
 //?page=페이지번호&?perPage=페이지당 데이터수
 const $base_url = `https://api.odcloud.kr/api/apnmOrg/v1/list`;
