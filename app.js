@@ -2,22 +2,12 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var request = require('request');
 var cheerio = require('cheerio');
-
 var app =express();
-const HTTPS = require('https');
-const domain = "www.stagefive.tk"
-const sslport = 80;
 
 app.set('view engine','ejs');
 app.set('views','./views')
 app.use(express.urlencoded( {extended : false } ));
 app.locals.pretty=true;
-
-// app.set('view engine','pug');
-
-app.use(express.static('public'));
-var http = require('http');
-var fs = require('fs');
 
 //?page=페이지번호&?perPage=페이지당 데이터수
 const $base_url = `https://api.odcloud.kr/api/apnmOrg/v1/list`;
@@ -34,18 +24,14 @@ app.post('/',function(req,res,next){
 
     request($api_url,function(err,response,body){
         if(err) throw err;
-        // console.log(body);
         //data부분만 추출
         var obj = JSON.parse(body).data;
-        // console.log(obj);
         //검색한 지역 포함한 모든 data 담기
         let searchList = obj.filter(searchList => {
             return searchList.orgZipaddr.includes(searchWord);
           });
         
-        // console.log(searchList);
         //result라는 변수에 담아 결과 보내기 
-        // var hey = searchList[0].orgZipaddr.split(',');
         var timeList=[];
         for(var i=0; i<searchList.length; i++){ //시간정보 파싱 
             var eachtime=[];
@@ -87,9 +73,7 @@ app.post('/',function(req,res,next){
                 
         }
         res.render('index', {result:JSON.stringify(searchList),info:searchList ,timeList:timeList});
-
     })
-
 })
 
 app.get('/',function(req,res){
