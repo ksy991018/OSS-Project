@@ -8,31 +8,26 @@
 - [공공데이터 포털에서 제공하는 코로나19 예방접종 위탁의료기관 정보 API](https://www.data.go.kr/tcs/dss/selectApiDataDetailView.do?publicDataPk=15081240)
 
 ## 💻 User Interface 
-<img src="https://user-images.githubusercontent.com/72537563/121006539-f48b7200-c7cb-11eb-8c69-26acaad5adcb.png"  width="1000" height="500">
-<img src="https://user-images.githubusercontent.com/72537563/121006567-fce3ad00-c7cb-11eb-8ce5-77729f903d72.png"  width="1000" height="500">
+<img src="https://user-images.githubusercontent.com/72537563/121036181-8786d500-c7e9-11eb-952b-5f80918c332f.png"  width="1000" height="500">
+<img src="https://user-images.githubusercontent.com/72537563/121036166-85247b00-c7e9-11eb-9f6d-ba4c90fd2bd3.png"  width="1000" height="500">
    
 ## 📋 기술 스택
-- Nodejs
-- Html(-> ejs(Embedded JavaScript))
-- Css
-- JavaScript
-- Express
+- Nodejs (Express)
+- EJS(Embedded JavaScript)
 - AWS EC2
  
-
 ## ✏️ 프로젝트 사용 방법
-1. cloning
+1. Cloning
 ```
 http://khuhub.khu.ac.kr/2018103585/Corona_Vaccination_Medical_Institution.git
 ```
 
-2. install npm packages
+2. Install npm packages
 ```
 cd Corona_Vaccination_Medical_Institution
 npm install
 ```
-3. add API key
-> Fill {} with API Key
+3. Fill {} with API Key
 ```
 const $key = '{Corona Vaccination Medical Institution API key}' //(app.js)
 ```
