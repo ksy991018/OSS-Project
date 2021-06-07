@@ -19,7 +19,7 @@
 ## ✏️ 프로젝트 사용 방법
 1. Cloning
 ```
-http://khuhub.khu.ac.kr/2018103585/Corona_Vaccination_Medical_Institution.git
+https://github.com/ksy991018/OSS-Project.git
 ```
 
 2. Install npm packages
