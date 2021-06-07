@@ -10,8 +10,8 @@
 - [공공데이터 포털에서 제공하는 코로나19 예방접종 위탁의료기관 정보 API](https://www.data.go.kr/tcs/dss/selectApiDataDetailView.do?publicDataPk=15081240)
 
 ## 💻 User Interface 
-<img src="/uploads/c003a2a8d20b368d3c0fb07c49007251/UI예시.png"  width="1000" height="600">
-
+<img src="https://user-images.githubusercontent.com/72537563/121006539-f48b7200-c7cb-11eb-8c69-26acaad5adcb.png"  width="1000" height="500">
+<img src="https://user-images.githubusercontent.com/72537563/121006567-fce3ad00-c7cb-11eb-8ce5-77729f903d72.png"  width="1000" height="500">
    
 ## 📋 기술 스택
 - Nodejs
@@ -47,7 +47,7 @@ node app.js
 ```
 
 ## 💻 Project Architecture
-<img src="/uploads/e100a6266d6c84863f5890fd3c54c56e/프로젝트_아키텍처.PNG"  width="1000" height="600">
+<img src="https://user-images.githubusercontent.com/72537563/121006863-58159f80-c7cc-11eb-95a9-d269cfba4309.png"  width="1000" height="500">
 
   
    
