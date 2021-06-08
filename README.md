@@ -3,6 +3,8 @@
 ## 🔍 About the Project
 > 현재 코로나19로 인해 얼마전부터 위탁의료기관을 통한 신종 코로나바이러스 감염증(코로나19) 접종이 본격 시작되었습니다. 이에 따라, 원하는 지역의 예방접종 위탁의료기관을 간편하게 조회할 수 있는 웹서비스를 개발하였습니다. 이 프로젝트는 매 정각 1번씩 갱신되고 있는 위탁의료기관의 데이터(점심시간,진료시간,휴무여부,주소,연락처 등)를 카카오맵을 활용하여 제공합니다.
 
+✔ [배포 주소](cvmimap.oss-2021.tk:3000)
+
 ## ✅ Open API
 - [카카오맵 API](https://apis.map.kakao.com/web/)
 - [공공데이터 포털에서 제공하는 코로나19 예방접종 위탁의료기관 정보 API](https://www.data.go.kr/tcs/dss/selectApiDataDetailView.do?publicDataPk=15081240)
