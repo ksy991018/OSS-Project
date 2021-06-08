@@ -11,7 +11,7 @@ app.locals.pretty=true;
 
 //?page=페이지번호&?perPage=페이지당 데이터수
 const $base_url = `https://api.odcloud.kr/api/apnmOrg/v1/list`;
-const $key = '4US0H%2BXj%2BmS8IR4YL0%2BUb9H4CcbTr92QxhYULfOEz1DT%2BZaaos4sRfNh6cmAD2Icli862Ysc31%2BaE4pWywDBIA%3D%3D';
+const $key = '';
 const $page=1;
 const $perPage=30000;
 
